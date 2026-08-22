@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+    <html lang="en">
+        <head>
+            <link rel="stylesheet" href="css/index_main_page.css">
+            <link rel="stylesheet" href="css/font_indexes.css">
+            <script src="js/shell_pet.js" defer></script>
+            <script src="js/pages.js" defer></script>
+        </head>
+        <body>
+            <main id="main_1">
+                <div id="topbar_button">
+                <a href="#" data-page="about_me">//About Me!</a>
+                <a href="#" data-page="main_page" class="active_link">//Main Page</a>
+                <a href="#" data-page="socials">//Socials</a>
+                <a href="#" data-page="media">//Media</a>
+                <a href="#" data-page="graphics">//Graphics</a>
+                     <div id="shell_pet">
+                    <div id="kits_head">
+                        <div id="kit_give" title="Give / receive"></div>
+                        <div id="chat_kit" title="Talk"></div>
+                        <div id="kit_related_to" title="Relationship"></div>
+                    </div>
+
+                    <div id="kits_body">
+                        <div id="pet_speech"></div>
+                        <div id="pet_gift_toast"></div>
+                        <img id="pet" src="css/img/dog-pet.png" height="70px" alt="shell pet">
+                    </div>
+
+                    <!-- Chat panel -->
+                    <div id="chat_panel" class="pet_panel">
+                        <div id="chat_log"></div>
+                        <form id="chat_form">
+                            <input id="chat_input" type="text" placeholder="Say something..." autocomplete="off">
+                            <button id="chat_send" type="submit">Send</button>
+                        </form>
+                    </div>
+
+                    <!-- Give panel -->
+                    <div id="give_panel" class="pet_panel">
+                        <div id="give_items"></div>
+                    </div>
+
+                    <!-- Relations panel -->
+                    <div id="relations_panel" class="pet_panel">
+                        <div id="relations_status"></div>
+                        <div id="affection_bar_track">
+                            <div id="affection_bar_fill"></div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            <div id="pages">
+                <article pageid="main_page" class="active_page">
+                    <h1>//Main Page</h1>
+                    <p>Welcome to the terminal. Pick a section from the menu.</p>
+                </article>
+ 
+                <article pageid="about_me">
+                    <h1>//About Me!</h1>
+                    <p>Hello i am firstgame_32124, i am running this website, also i pick cool,anomaly weirdest things ever. my fav medias are <b>Spongebob Squarepants,HFJONE</b><br>Also my favorite is messing up old roblox clients.</p>
+                </article>
+ 
+                <article pageid="socials">
+                    <h1>//Socials</h1>
+                    <p>Links to where else you can find me.</p>
+                    <a href="https://www.youtube.com/@gr5-h5d">Youtube</a>
+                    <a href="https://www.youview.lol/profile?user=datozimi">YouView</a>
+                </article>
+ 
+                <article pageid="media">
+                    <h1>//Media</h1>
+                    <p>Videos, music, and other media I like.</p>
+                </article>
+ 
+                <article pageid="graphics">
+                    <h1>//Graphics</h1>
+                    <p>Art, edits, and graphics I've made.</p>
+                </article>
+            </div>
+            </main>
+        </body>
+    </html>
