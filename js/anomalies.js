@@ -92,8 +92,6 @@ const CASES = [
   }
 ];
 
-
-
 const REPORTS = [
   { num: "001", year: "2008", title: "Repeated Bot Movement", note: "A BOT GUY instance repeatedly returned to the same location after being moved away by its owner. The behavior was recorded for further observation.", foot: "Status: Under review" },
   { num: "002", year: "2010", title: "Mechanical Robot Sighting", note: "A mechanical-looking bot was observed in an old BOT GUY environment and appeared capable of retaining fragments of an earlier configuration.", foot: "Associated case: Robots", link: "article_2" },
