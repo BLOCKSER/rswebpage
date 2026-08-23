@@ -1,10 +1,3 @@
-/* =========================================================
-   ABR CASE ARCHIVE — DATA LAYER
-   All case content lives here, separate from rendering (archive.js)
-   and presentation (archive.css). Edit this file to add cases,
-   reports, or timeline entries without touching layout code.
-   ========================================================= */
-
 const CASES = [
   {
     id: "article_1",
