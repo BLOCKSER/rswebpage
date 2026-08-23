@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ABR CASE ARCHIVE — Anomalies on Bots on Roblox</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/anomalies.css">
+</head>
+<body>
+
+<div class="grain-overlay"></div>
+
+<div id="archive">
+
+  <!-- ============ HEADER ============ -->
+  <header id="masthead">
+    <div id="masthead-top">
+      <div id="case-seal" aria-hidden="true">
+        <svg viewBox="0 0 100 100">
+          <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="50" cy="50" r="39" fill="none" stroke="currentColor" stroke-width="1"/>
+          <text x="50" y="42" text-anchor="middle" class="seal-text-big">ABR</text>
+          <text x="50" y="56" text-anchor="middle" class="seal-text-small">CASE ARCHIVE</text>
+          <text x="50" y="66" text-anchor="middle" class="seal-text-small">EST. 2007</text>
+        </svg>
+      </div>
+      <div id="masthead-title">
+        <p id="masthead-eyebrow">FIELD INVESTIGATION DATABASE — CLASSIFICATION LEVEL: PUBLIC</p>
+        <h1>Anomalies on Bots<br>on Roblox</h1>
+        <p id="masthead-sub">A case archive documenting <strong>BOT&nbsp;GUY</strong> and associated anomalies · Investigation window 2006–2016</p>
+      </div>
+      <div id="masthead-status">
+        <div class="status-chip" id="global-status-chip">
+          <span class="status-dot"></span> INVESTIGATION ACTIVE
+        </div>
+        <div id="clock-readout">
+          <span id="clock-date"></span>
+          <span id="clock-time"></span>
+        </div>
+      </div>
+    </div>
+
+    <div id="search-band">
+      <form id="search-form" autocomplete="off" role="search">
+        <span id="search-icon" aria-hidden="true">⌕</span>
+        <input id="search-input" type="search" placeholder="Search the archive — case names, dates, classifications, quotes…" aria-label="Search investigation records">
+        <kbd id="search-kbd">/</kbd>
+      </form>
+      <div id="search-results" role="listbox"></div>
+    </div>
+  </header>
+
+  <!-- ============ TOPBAR ============ -->
+  <nav id="topbar" aria-label="Primary">
+    <button class="topbar-link active" data-target="view_overview">Dossier</button>
+    <button class="topbar-link" data-target="view_about">About the Investigation</button>
+    <button class="topbar-link" data-target="view_reports">Field Reports</button>
+    <button class="topbar-link" data-target="view_history">Case Timeline</button>
+    <div id="topbar-spacer"></div>
+    <button class="topbar-link" id="quickfacts-toggle" aria-expanded="false">Quick Answers ▾</button>
+  </nav>
+
+  <!-- ============ QUICK ANSWERS DRAWER ============ -->
+  <div id="quickfacts-drawer">
+    <div id="quickfacts-inner">
+      <div class="qf-item"><span class="qf-q">What is BOT GUY?</span><span class="qf-a">A standalone bot system for Roblox (2007) letting bots socialize, fight, and build.</span></div>
+      <div class="qf-item"><span class="qf-q">Investigation span?</span><span class="qf-a">Approximately 2006–2016.</span></div>
+      <div class="qf-item"><span class="qf-q">Most dangerous case?</span><span class="qf-a"><button class="qf-link" data-target="article_1">Fractal Crossparts</button> — classified Dangerous.</span></div>
+      <div class="qf-item"><span class="qf-q">Safest documented case?</span><span class="qf-a"><button class="qf-link" data-target="article_2">Robots</button> — classified Safe, non-hostile.</span></div>
+      <div class="qf-item"><span class="qf-q">Largest bot settlement?</span><span class="qf-a">Jazirisk, in <button class="qf-link" data-target="article_3">The Woods</button> — 100,000+ bots.</span></div>
+      <div class="qf-item"><span class="qf-q">Current status?</span><span class="qf-a">Ongoing review. Field records still being reconciled.</span></div>
+    </div>
+  </div>
+
+  <div id="layout">
+
+    <!-- ============ SIDEBAR ============ -->
+    <aside id="sidebar">
+
+      <section class="folder-group">
+        <h3 class="folder-tab">Investigation</h3>
+        <button class="folder-link active" data-target="view_overview"><span class="fl-icon">▤</span>Dossier Overview</button>
+        <button class="folder-link" data-target="view_about"><span class="fl-icon">i</span>About the Investigation</button>
+        <button class="folder-link" data-target="view_reports"><span class="fl-icon">✉</span>Field Reports</button>
+        <button class="folder-link" data-target="view_history"><span class="fl-icon">◷</span>Case Timeline</button>
+      </section>
+
+      <section class="folder-group">
+        <h3 class="folder-tab">Case Files</h3>
+        <button class="folder-link case-link" data-target="article_1" data-status="dangerous"><span class="fl-icon status-icon status-icon-dangerous"></span>Fractal Crossparts</button>
+        <button class="folder-link case-link" data-target="article_2" data-status="safe"><span class="fl-icon status-icon status-icon-safe"></span>Robots</button>
+        <button class="folder-link case-link" data-target="article_3" data-status="moderate"><span class="fl-icon status-icon status-icon-moderate"></span>The Woods</button>
+      </section>
+
+      <section class="folder-group">
+        <h3 class="folder-tab">Legend</h3>
+        <div class="legend-row"><span class="status-icon status-icon-dangerous"></span> Dangerous</div>
+        <div class="legend-row"><span class="status-icon status-icon-moderate"></span> Moderate</div>
+        <div class="legend-row"><span class="status-icon status-icon-safe"></span> Safe</div>
+      </section>
+
+      <section class="folder-group" id="ledger-box">
+        <h3 class="folder-tab">Ledger</h3>
+        <div class="ledger-row"><span>Case files</span><strong id="ledger-cases">0</strong></div>
+        <div class="ledger-row"><span>Field reports</span><strong id="ledger-reports">0</strong></div>
+        <div class="ledger-row"><span>Timeline entries</span><strong id="ledger-timeline">0</strong></div>
+        <div class="ledger-row"><span>Span</span><strong>2006–16</strong></div>
+      </section>
+
+    </aside>
+
+    <!-- ============ MAIN ============ -->
+    <main id="content">
+
+      <!-- ===== OVERVIEW ===== -->
+      <section class="view active" id="view_overview" data-title="Dossier Overview">
+
+        <div class="view-head">
+          <p class="stamp-eyebrow">DOSSIER № 000 — MASTER INDEX</p>
+          <h1>Investigation Overview</h1>
+        </div>
+
+        <div class="lede-card">
+          <p>This archive collects field investigation records concerning <strong>BOT&nbsp;GUY</strong>, a standalone Roblox bot system dating to <strong>2007</strong>, and the unexplained phenomena that came to be documented around it. BOT GUY let bots socialize, converse, fight, cooperate, and build — the anomalies below emerged from that behavior in ways investigators have never fully closed out.</p>
+          <div class="lede-meta">
+            <div class="lede-meta-item"><span>Period under review</span><strong>2006 – 2016</strong></div>
+            <div class="lede-meta-item"><span>Status</span><strong class="ink-amber">Active review</strong></div>
+            <div class="lede-meta-item"><span>Access level</span><strong>Public dossier</strong></div>
+          </div>
+        </div>
+
+        <div class="overview-grid">
+
+          <!-- Featured case carousel -->
+          <div class="panel" id="featured-panel">
+            <div class="panel-head">
+              <h2>Featured Case Files</h2>
+              <div class="carousel-controls">
+                <button id="feat-prev" aria-label="Previous case">←</button>
+                <button id="feat-next" aria-label="Next case">→</button>
+              </div>
+            </div>
+            <div id="feat-track">
+
+              <article class="feat-slide active" data-status="dangerous">
+                <span class="feat-stamp stamp-dangerous">DANGEROUS</span>
+                <h3><button class="link-btn" data-target="article_1">Fractal Crossparts</button></h3>
+                <p class="feat-date">First recorded 2011-06-02</p>
+                <p>Blocky, self-repeating cross-shaped structures reported to resolve into a landing portal, with hostile entities documented nearby.</p>
+                <button class="feat-open link-btn" data-target="article_1">Open case file →</button>
+              </article>
+
+              <article class="feat-slide" data-status="safe">
+                <span class="feat-stamp stamp-safe">SAFE</span>
+                <h3><button class="link-btn" data-target="article_2">Robots</button></h3>
+                <p class="feat-date">First recorded 2010-02-02</p>
+                <p>Mechanical entities believed to be transformed or trapped BOT GUY instances, retaining partial memory of bot behavior.</p>
+                <button class="feat-open link-btn" data-target="article_2">Open case file →</button>
+              </article>
+
+              <article class="feat-slide" data-status="moderate">
+                <span class="feat-stamp stamp-moderate">MODERATE</span>
+                <h3><button class="link-btn" data-target="article_3">The Woods</button></h3>
+                <p class="feat-date">First recorded 2007-02-06</p>
+                <p>An environment of autonomous builder bots that grew into Jazirisk, a settlement exceeding 100,000 bots, before server failure in 2015.</p>
+                <button class="feat-open link-btn" data-target="article_3">Open case file →</button>
+              </article>
+
+            </div>
+            <div id="feat-dots"></div>
+          </div>
+
+          <!-- Stats -->
+          <div class="panel" id="stats-panel">
+            <div class="panel-head"><h2>At a Glance</h2></div>
+            <div class="stat-grid">
+              <div class="stat-cell"><strong id="stat-cases">0</strong><span>Case files</span></div>
+              <div class="stat-cell"><strong id="stat-dangerous">0</strong><span>Dangerous</span></div>
+              <div class="stat-cell"><strong>2006–16</strong><span>Investigation span</span></div>
+              <div class="stat-cell"><strong>ACTIVE</strong><span>Current condition</span></div>
+            </div>
+            <div class="panel-note">
+              <p>Records below were compiled from field observation, user testimony, and investigator notes. Each case is preserved independently so classification can change without disturbing the source material.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Index -->
+        <div class="panel">
+          <div class="panel-head">
+            <h2>Case Index</h2>
+            <span class="panel-tag">Sorted by classification</span>
+          </div>
+          <div id="case-index"></div>
+        </div>
+
+        <!-- Log -->
+        <div class="panel">
+          <div class="panel-head"><h2>Investigation Log</h2></div>
+          <div id="case-log"></div>
+        </div>
+
+      </section>
+
+      <!-- ===== ABOUT ===== -->
+      <section class="view" id="view_about" data-title="About the Investigation">
+        <div class="view-head">
+          <p class="stamp-eyebrow">DOSSIER № 001</p>
+          <h1>About the Investigation</h1>
+        </div>
+
+        <div class="callout callout-amber">
+          <strong>Notice</strong>
+          <p>This archive documents fictional investigations concerning BOT GUY and unusual events observed around its environments. The primary investigation period spans approximately <strong>2006–2016</strong>.</p>
+        </div>
+
+        <h2>Purpose</h2>
+        <p>The archive was structured as an investigation reference for recording reported anomalies, observations, and field findings associated with BOT GUY. Historical explanations, dates, metadata, classifications, and user-written observations are retained together so individual case files can be reviewed independently of one another.</p>
+
+        <h2>Condition of the Investigation</h2>
+        <table class="record-table">
+          <tbody>
+            <tr><th>Investigation period</th><td>2006–2016</td></tr>
+            <tr><th>Current condition</th><td class="ink-amber">Ongoing review</td></tr>
+            <tr><th>Records held</th><td>Case files, field reports, timeline entries</td></tr>
+            <tr><th>Submission system</th><td>Operational throughout the investigation window</td></tr>
+            <tr><th>Incident status</th><td>Under investigation</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- ===== REPORTS ===== -->
+      <section class="view" id="view_reports" data-title="Field Reports">
+        <div class="view-head">
+          <p class="stamp-eyebrow">DOSSIER № 002</p>
+          <h1>Field Reports</h1>
+        </div>
+
+        <div class="callout callout-manila">
+          <span class="callout-icon">!</span>
+          <div><strong>Field Report Intake</strong><p>Submitted by users, observers, and investigators while unusual BOT GUY behavior was under examination.</p></div>
+        </div>
+
+        <p>Reports were reviewed and, where enough information existed, associated with a case file. Some original submission fields no longer survive, but explanatory text and simplified report data remain available below.</p>
+
+        <table class="record-table">
+          <tbody>
+            <tr><th>System</th><td>Field Report Intake</td></tr>
+            <tr><th>Investigation period</th><td>Approximately 2006–2016</td></tr>
+            <tr><th>Submission form</th><td class="ink-muted">Historical interface unavailable</td></tr>
+            <tr><th>Current purpose</th><td>Investigation reference</td></tr>
+          </tbody>
+        </table>
+
+        <h2>Submitted Reports</h2>
+        <div id="reports-list"></div>
+
+        <div class="callout callout-amber">
+          <strong>Investigation State</strong>
+          <p>These reports represent material still being examined. Entries may contain incomplete observations, user testimony, and provisional classifications.</p>
+        </div>
+      </section>
+
+      <!-- ===== HISTORY / TIMELINE ===== -->
+      <section class="view" id="view_history" data-title="Case Timeline">
+        <div class="view-head">
+          <p class="stamp-eyebrow">DOSSIER № 003</p>
+          <h1>BOT GUY Case Timeline</h1>
+        </div>
+        <div id="timeline"></div>
+      </section>
+
+      <!-- ===== CASE FILE TEMPLATE TARGETS (populated by data, rendered by JS) ===== -->
+      <section class="view" id="article_1" data-title="Fractal Crossparts"></section>
+      <section class="view" id="article_2" data-title="Robots"></section>
+      <section class="view" id="article_3" data-title="The Woods"></section>
+
+      <!-- ===== NO RESULTS ===== -->
+      <section class="view" id="view_noresults">
+        <div class="no-results-box">
+          <p class="no-results-mark">∅</p>
+          <h2>No Matching Records</h2>
+          <p>No case files, reports, or timeline entries matched that search.</p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <footer id="archive-footer">
+    <span>ABR Case Archive</span>
+    <span>Investigation period · 2006–2016</span>
+    <button class="link-btn" data-target="view_about">About the Investigation</button>
+  </footer>
+
+</div>
+
+<script src="js/anomalies.js"></script>
+<script src="js/anomaliesa.js"></script>
+</body>
+</html>

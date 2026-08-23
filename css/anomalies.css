@@ -1,12 +1,3 @@
-/* =========================================================
-   ABR CASE ARCHIVE — DESIGN SYSTEM
-   Palette:  ink #14150f · paper #f2ede1 · card #fbf8f0
-             danger #8a1f1f · moderate #9a6b1f · safe #4f6b3f
-             brass #b8925a · line #d8cfb8
-   Type:     Special Elite (display/stamps) · Source Serif 4 (body)
-             JetBrains Mono (data / metadata)
-   ========================================================= */
-
 :root {
   --ink:        #17170f;
   --ink-soft:   #3d3b30;
