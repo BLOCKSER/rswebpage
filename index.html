@@ -1,101 +1,18 @@
 <!DOCTYPE html>
-    <html lang="en">
-        <head>
-            <link rel="stylesheet" href="css/index_main_page.css">
-            <link rel="stylesheet" href="css/font_indexes.css">
-            <link rel="preconnect" href="https://fonts.googleapis.com">
-            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-            <script src="js/shell_pet.js" defer></script>
-            <script src="js/pages.js" defer></script>
-            <script src="https://unpkg.com/@ruffle-rs/ruffle" defer></script>
-        </head>
-        <body>
-            <main id="main_1">
-                <div id="topbar_button">
-                <a href="#" data-page="about_me">//About Me!</a>
-                <a href="#" data-page="main_page" class="active_link">//Main Page</a>
-                <a href="#" data-page="socials">//Socials</a>
-                <a href="#" data-page="media">//Media</a>
-                <a href="#" data-page="graphics">//Graphics</a>
-                 <a href="#" data-page="Anomalieswiki">//Anomalies Wiki</a>
-                     <div id="shell_pet">
-                    <div id="kits_head">
-                        <div id="kit_give" title="Give / receive"></div>
-                        <div id="chat_kit" title="Talk"></div>
-                        <div id="kit_related_to" title="Relationship"></div>
-                    </div>
+<html>
+    <head>
+        <link rel="stylesheet" href="css/index.css">
+    </head>
+    <body>
+        <div id="header">
+            <span id="logo">firstgame_32124's website</span>
+        </div>
+        <div id="body">
 
-                    <div id="kits_body">
-                        <div id="pet_speech"></div>
-                        <div id="pet_gift_toast"></div>
-                        <img id="pet" src="css/img/dog-pet.png" height="70px" alt="shell pet">
-                    </div>
-
-                    <!-- Chat panel -->
-                    <div id="chat_panel" class="pet_panel">
-                        <div id="chat_log"></div>
-                        <form id="chat_form">
-                            <input id="chat_input" type="text" placeholder="Say something..." autocomplete="off">
-                            <button id="chat_send" type="submit">Send</button>
-                        </form>
-                    </div>
-
-                    <!-- Give panel -->
-                    <div id="give_panel" class="pet_panel">
-                        <div id="give_items"></div>
-                    </div>
-
-                    <!-- Relations panel -->
-                    <div id="relations_panel" class="pet_panel">
-                        <div id="relations_status"></div>
-                        <div id="affection_bar_track">
-                            <div id="affection_bar_fill"></div>
-                        </div>
-                    </div>
-                </div>
-                </div>
-            <div id="pages">
-                <article pageid="main_page" class="active_page">
-                    <h1>//Main Page</h1>
-                    <p>Welcome to the terminal. Pick a section from the menu.</p>
-                </article>
- 
-                <article pageid="about_me">
-                    <h1>//About Me!</h1>
-                    <p>Hello i am firstgame_32124, i am running this website, also i pick cool,anomaly weirdest things ever. my fav medias are <b>Spongebob Squarepants,HFJONE</b><br>Also my favorite is messing up old roblox clients.</p>
-                </article>
- 
-                <article pageid="socials">
-                    <h1>//Socials</h1>
-                    <p>Links to where else you can find me.</p>
-                    <a href="https://www.youtube.com/@gr5-h5d">Youtube</a>
-                    <a href="https://www.youview.lol/profile?user=datozimi">YouView</a>
-                </article>
- 
-                <article pageid="media">
-                    <h1>//Media</h1>
-                    <p>Videos, music, and other media I created.</p>
-                    <object width="425" height="350"><param name="movie" value="http://www.youview.lol/v/76zkJVEWRCk"></param><embed src="http://www.youview.lol/v/76zkJVEWRCk" type="application/x-shockwave-flash" width="425" height="350"></embed></object>
-                    <object width="425" height="350"><param name="movie" value="http://www.youview.lol/v/8lKf4FZ-QuM"></param><embed src="http://www.youview.lol/v/8lKf4FZ-QuM" type="application/x-shockwave-flash" width="425" height="350"></embed></object>
-                </article>
- 
-                <article pageid="graphics">
-                    <h1>//Graphics</h1>
-                    <p>Art, edits, and graphics I've made.</p>
-                </article>
-                <article pageid="Anomalieswiki">
-                    <h1>//Anomalies</h1>
-                    <p>this is the arg i created</p>
-                    <a href="anomwiki.html">Anomalies Wiki</a>
-                    <svg viewBox="0 0 1000 1000">
-                        <circle cx="50" cy="50" r="46" fill="none" stroke="currentColor" stroke-width="1.5"/>
-                        <circle cx="50" cy="50" r="39" fill="none" stroke="currentColor" stroke-width="1"/>
-                        <text x="50" y="42" text-anchor="middle" class="seal-text-big">ABR</text>
-                        <text x="50" y="56" text-anchor="middle" class="seal-text-small">CASE ARCHIVE</text>
-                        <text x="50" y="66" text-anchor="middle" class="seal-text-small">EST. 2007</text>
-                    </svg>
-                </article>
-            </div>
-            </main>
-        </body>
-    </html>
+        </div>
+        <div id="footer">
+        
+        </div>
+        <script src="js/index.js" defer></script>
+    </body>
+</html>
