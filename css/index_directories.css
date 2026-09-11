@@ -1,8 +1,3 @@
-html {
-    margin: 0;
-    padding: 0;
-}
-
 body {
     margin: 0;
     padding: 20px;
@@ -21,24 +16,10 @@ body {
     border: 1px solid #ddd;
 }
 
-.header {
-    border-bottom: 1px solid #ddd;
-}
-
-.home_hero {
-    padding: 30px;
-
-    background-image: url("/rswebpage/images/batch2_mind.jpg");
-    background-size: 900px;
-}
-
-.home_tagline {
-    font-size: 14px;
-}
-
 .navigation {
     padding: 10px 20px;
     background: #fafafa;
+    border-bottom: 1px solid #ddd;
 }
 
 .navigation ul {
@@ -66,10 +47,54 @@ body {
 }
 
 .body {
-    min-height: 400px;
     padding: 30px;
 }
 
+#directories {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.image_withalt {
+    width: 200px;
+    text-align: center;
+}
+
+.image_withalt img {
+    display: block;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.image_withalt small {
+    display: block;
+    margin-top: 5px;
+    color: #777;
+}
+
+#booktext {
+    flex: 1;
+    padding: 20px;
+
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+
+    box-shadow: 0 2px 6px #0001;
+}
+
+#notes {
+    width: 180px;
+    padding: 20px;
+
+    background: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+
+    box-shadow: 0 2px 6px #0001;
+}
 .footer {
     padding: 15px 30px;
 
