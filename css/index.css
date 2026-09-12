@@ -159,19 +159,26 @@ body {
     left: 0;
     top: 0;
 
+    margin: 0;
+    padding: 0;
+
     pointer-events: none;
 
-    z-index: 9999;
+    z-index: 99999;
 
     will-change: transform;
+
+    display: block;
 }
 
 .pixel_particle {
     background: #222;
 
+    border: 0;
+
     image-rendering: pixelated;
 
-    box-shadow: 0 0 2px #000;
+    box-shadow: 0 0 3px #000;
 }
 
 .number_particle {
@@ -179,6 +186,8 @@ body {
 
     font-family: Arial, sans-serif;
     font-weight: bold;
+
+    line-height: 1;
 
     text-shadow:
         1px 1px 0 #fff,

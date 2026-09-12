@@ -1,402 +1,343 @@
-function physicsCell(element, options = {}) {
-    const rect = element.getBoundingClientRect();
+const background = document.getElementById("minesweeper_background");
 
-    const clone = element.cloneNode(true);
+const cellSize = 32;
+const mineRate = 0.10;
+const saveKey = "minesweeper_save";
 
-    clone.className = element.className;
-    clone.style.position = "fixed";
-    clone.style.left = `${rect.left}px`;
-    clone.style.top = `${rect.top}px`;
-    clone.style.width = `${rect.width}px`;
-    clone.style.height = `${rect.height}px`;
-    clone.style.margin = "0";
-    clone.style.zIndex = "10000";
-    clone.style.pointerEvents = "none";
-    clone.style.boxSizing = "border-box";
+let rows;
+let columns;
+let mines;
+let board = [];
 
-    document.body.appendChild(clone);
+function getSize() {
+    columns = Math.ceil(window.innerWidth / cellSize) + 1;
+    rows = Math.ceil(window.innerHeight / cellSize) + 1;
+    mines = Math.floor(rows * columns * mineRate);
+}
 
-    element.style.visibility = "hidden";
+function createBoard() {
+    board = [];
 
-    let x = rect.left;
-    let y = rect.top;
+    for (let row = 0; row < rows; row++) {
+        board[row] = [];
 
-    let vx = options.vx ?? 0;
-    let vy = options.vy ?? 0;
-
-    let gravity = options.gravity ?? 0.65;
-    let rotation = 0;
-    let rotationSpeed = options.rotationSpeed ?? 0;
-
-    let mode = options.mode || "fall";
-
-    let paneHit = false;
-    let slideSpeed = 0;
-
-    let lastTime = performance.now();
-
-    function update(time) {
-        const delta = Math.min(
-            (time - lastTime) / 16.67,
-            2
-        );
-
-        lastTime = time;
-
-        if (mode === "fall") {
-            vx *= Math.pow(0.995, delta);
-
-            vy += gravity * delta;
-
-            x += vx * delta;
-            y += vy * delta;
-
-            rotation += rotationSpeed * delta;
+        for (let column = 0; column < columns; column++) {
+            board[row][column] = {
+                mine: false,
+                revealed: false,
+                flagged: false,
+                number: 0
+            };
         }
-
-        if (mode === "bomb") {
-            if (!paneHit) {
-                vx *= Math.pow(0.998, delta);
-
-                vy += gravity * 0.35 * delta;
-
-                x += vx * delta;
-                y += vy * delta;
-
-                rotation += rotationSpeed * delta;
-
-                if (y > window.innerHeight * 0.48) {
-                    paneHit = true;
-
-                    createGlassBreak(
-                        window.innerWidth * 0.5,
-                        window.innerHeight * 0.5
-                    );
-
-                    vx = 0;
-                    vy = 0;
-                    slideSpeed = 0.25;
-                }
-            } else {
-                slideSpeed += 0.025 * delta;
-
-                y += slideSpeed * delta;
-
-                rotation += rotationSpeed * 0.15 * delta;
-
-                if (y > window.innerHeight * 0.62) {
-                    mode = "fall";
-
-                    vx = -1.2;
-                    vy = 1;
-                    gravity = 0.7;
-                    rotationSpeed = 3;
-                }
-            }
-        }
-
-        clone.style.transform =
-            `translate3d(${x - rect.left}px, ${y - rect.top}px, 0)
-             rotate(${rotation}deg)`;
-
-        if (
-            x + rect.width < -150 ||
-            x > window.innerWidth + 150 ||
-            y > window.innerHeight + 150
-        ) {
-            clone.remove();
-            return;
-        }
-
-        requestAnimationFrame(update);
     }
 
-    requestAnimationFrame(update);
-}
+    let placed = 0;
 
-function createGlassBreak(x, y) {
-    const pane = document.createElement("div");
+    while (placed < mines) {
+        const row = Math.floor(Math.random() * rows);
+        const column = Math.floor(Math.random() * columns);
 
-    pane.className = "glass_break";
-
-    pane.style.left = `${x}px`;
-    pane.style.top = `${y}px`;
-
-    document.body.appendChild(pane);
-
-    const cracks = [
-        "M0 0 L-35 -45 L-70 -70",
-        "M0 0 L45 -30 L75 -65",
-        "M0 0 L60 5 L100 -15",
-        "M0 0 L35 45 L65 75",
-        "M0 0 L-25 55 L-55 95",
-        "M0 0 L-55 10 L-95 35",
-        "M0 0 L-10 -65 L10 -110"
-    ];
-
-    cracks.forEach(path => {
-        const crack = document.createElement("div");
-
-        crack.className = "glass_crack";
-
-        crack.style.setProperty(
-            "--crack",
-            path
-        );
-
-        pane.appendChild(crack);
-    });
-
-    pane.animate(
-        [
-            {
-                opacity: 0,
-                transform: "translate(-50%, -50%) scale(0.7)"
-            },
-            {
-                opacity: 1,
-                transform: "translate(-50%, -50%) scale(1.05)"
-            },
-            {
-                opacity: 1,
-                transform: "translate(-50%, -50%) scale(1)"
-            }
-        ],
-        {
-            duration: 180,
-            easing: "ease-out"
+        if (!board[row][column].mine) {
+            board[row][column].mine = true;
+            placed++;
         }
-    );
+    }
 
-    setTimeout(() => {
-        pane.animate(
-            [
-                {
-                    opacity: 1
-                },
-                {
-                    opacity: 0
-                }
-            ],
-            {
-                duration: 500,
-                easing: "ease-out"
-            }
-        );
-
-        setTimeout(() => {
-            pane.remove();
-        }, 500);
-    }, 700);
+    calculateNumbers();
 }
 
-function createPixelBurst(element, amount = 10) {
-    const rect = element.getBoundingClientRect();
+function calculateNumbers() {
+    for (let row = 0; row < rows; row++) {
+        for (let column = 0; column < columns; column++) {
+            if (!board[row][column].mine) {
+                board[row][column].number = countMines(row, column);
+            }
+        }
+    }
+}
 
-    for (let i = 0; i < amount; i++) {
-        const pixel = document.createElement("div");
+function countMines(row, column) {
+    let count = 0;
 
-        pixel.className = "pixel_particle";
-
-        pixel.style.position = "fixed";
-        pixel.style.left =
-            `${rect.left + rect.width / 2}px`;
-        pixel.style.top =
-            `${rect.top + rect.height / 2}px`;
-
-        const size = Math.floor(Math.random() * 5) + 2;
-
-        pixel.style.width = `${size}px`;
-        pixel.style.height = `${size}px`;
-
-        pixel.style.zIndex = "10001";
-
-        document.body.appendChild(pixel);
-
-        let x = rect.left + rect.width / 2;
-        let y = rect.top + rect.height / 2;
-
-        let vx = (Math.random() - 0.5) * 10;
-        let vy = -Math.random() * 9;
-
-        let rotation = 0;
-        let rotationSpeed =
-            (Math.random() - 0.5) * 15;
-
-        let lastTime = performance.now();
-
-        function update(time) {
-            const delta = Math.min(
-                (time - lastTime) / 16.67,
-                2
-            );
-
-            lastTime = time;
-
-            vy += 0.6 * delta;
-
-            vx *= Math.pow(0.985, delta);
-
-            x += vx * delta;
-            y += vy * delta;
-
-            rotation += rotationSpeed * delta;
-
-            pixel.style.transform =
-                `translate3d(${x}px, ${y}px, 0)
-                 rotate(${rotation}deg)`;
+    for (let y = -1; y <= 1; y++) {
+        for (let x = -1; x <= 1; x++) {
+            const newRow = row + y;
+            const newColumn = column + x;
 
             if (
-                x < -100 ||
-                x > window.innerWidth + 100 ||
-                y > window.innerHeight + 100
+                newRow >= 0 &&
+                newRow < rows &&
+                newColumn >= 0 &&
+                newColumn < columns &&
+                board[newRow][newColumn].mine
             ) {
-                pixel.remove();
-                return;
+                count++;
             }
-
-            requestAnimationFrame(update);
         }
-
-        requestAnimationFrame(update);
     }
+
+    return count;
 }
 
-function numberAnimation(element) {
-    element.animate(
-        [
-            {
-                transform: "scale(0.2) rotate(-20deg)",
-                opacity: 0
-            },
-            {
-                transform: "scale(1.3) rotate(8deg)",
-                opacity: 1
-            },
-            {
-                transform: "scale(1) rotate(0deg)",
-                opacity: 1
-            }
-        ],
-        {
-            duration: 220,
-            easing: "cubic-bezier(.2,1.5,.4,1)"
+function drawBoard() {
+    background.innerHTML = "";
+
+    const grid = document.createElement("div");
+
+    grid.className = "minesweeper_grid";
+
+    grid.style.gridTemplateColumns =
+        `repeat(${columns}, ${cellSize}px)`;
+
+    grid.style.gridTemplateRows =
+        `repeat(${rows}, ${cellSize}px)`;
+
+    grid.style.width = `${columns * cellSize}px`;
+    grid.style.height = `${rows * cellSize}px`;
+
+    for (let row = 0; row < rows; row++) {
+        for (let column = 0; column < columns; column++) {
+            const cell = document.createElement("button");
+
+            cell.className = "mine_cell";
+
+            cell.dataset.row = row;
+            cell.dataset.column = column;
+
+            cell.addEventListener("click", () => {
+                revealCell(row, column);
+            });
+
+            cell.addEventListener("contextmenu", event => {
+                event.preventDefault();
+                flagCell(row, column);
+            });
+
+            grid.appendChild(cell);
         }
-    );
+    }
 
-    createPixelBurst(element, 6);
+    background.appendChild(grid);
 
-    physicsCell(element, {
-        vx: (Math.random() - 0.5) * 5,
-        vy: -2,
-        gravity: 0.7,
-        rotationSpeed:
-            (Math.random() - 0.5) * 10,
-        mode: "fall"
-    });
+    restoreVisualState();
 }
 
-function flagAnimation(element) {
-    element.animate(
-        [
-            {
-                transform: "scale(0.2) rotate(-35deg)",
-                opacity: 0
-            },
-            {
-                transform: "scale(1.35) rotate(12deg)",
-                opacity: 1
-            },
-            {
-                transform: "scale(0.95) rotate(-4deg)"
-            },
-            {
-                transform: "scale(1) rotate(0deg)"
-            }
-        ],
-        {
-            duration: 280,
-            easing: "cubic-bezier(.2,1.4,.4,1)"
-        }
-    );
+function revealCell(row, column) {
+    const cell = board[row][column];
 
-    createPixelBurst(element, 5);
-}
-
-function mineExplosion(element) {
-    element.animate(
-        [
-            {
-                transform: "scale(1)",
-                filter: "brightness(1)"
-            },
-            {
-                transform: "scale(1.7)",
-                filter: "brightness(3)"
-            },
-            {
-                transform: "scale(0.7)",
-                filter: "brightness(5)"
-            },
-            {
-                transform: "scale(1)",
-                filter: "brightness(1)"
-            }
-        ],
-        {
-            duration: 400,
-            easing: "cubic-bezier(.2,.8,.3,1)"
-        }
-    );
-
-    createPixelBurst(element, 30);
-
-    setTimeout(() => {
-        physicsCell(element, {
-            vx: (Math.random() - 0.5) * 5,
-            vy: -13,
-            gravity: 0.3,
-            rotationSpeed:
-                (Math.random() - 0.5) * 14,
-            mode: "bomb"
-        });
-    }, 100);
-}
-
-function resetAnimation() {
-    const grid =
-        document.querySelector(".minesweeper_grid");
-
-    if (!grid) {
+    if (cell.revealed || cell.flagged) {
         return;
     }
 
-    grid.animate(
-        [
-            {
-                opacity: 0,
-                transform:
-                    "translate(-50%, -50%) scale(0.92)"
-            },
-            {
-                opacity: 1,
-                transform:
-                    "translate(-50%, -50%) scale(1.03)"
-            },
-            {
-                opacity: 1,
-                transform:
-                    "translate(-50%, -50%) scale(1)"
-            }
-        ],
-        {
-            duration: 350,
-            easing: "cubic-bezier(.2,1.3,.4,1)"
+    cell.revealed = true;
+
+    const element = getElement(row, column);
+
+    if (cell.mine) {
+        element.textContent = "💣";
+        element.classList.add("mine");
+
+        if (window.mineSound) {
+            window.mineSound();
         }
+
+        if (window.mineExplosion) {
+            window.mineExplosion(element);
+        }
+
+        saveGame();
+
+        setTimeout(resetGame, 700);
+
+        return;
+    }
+
+    element.classList.add("revealed");
+
+    if (cell.number > 0) {
+        element.textContent = cell.number;
+
+        if (window.clickSound) {
+            window.clickSound(cell.number);
+        }
+
+        if (window.numberAnimation) {
+            window.numberAnimation(element);
+        }
+    } else {
+        revealNearby(row, column);
+    }
+
+    saveGame();
+}
+
+function revealNearby(row, column) {
+    for (let y = -1; y <= 1; y++) {
+        for (let x = -1; x <= 1; x++) {
+            const newRow = row + y;
+            const newColumn = column + x;
+
+            if (
+                newRow >= 0 &&
+                newRow < rows &&
+                newColumn >= 0 &&
+                newColumn < columns
+            ) {
+                if (!board[newRow][newColumn].revealed) {
+                    revealCell(newRow, newColumn);
+                }
+            }
+        }
+    }
+}
+
+function flagCell(row, column) {
+    const cell = board[row][column];
+
+    if (cell.revealed) {
+        return;
+    }
+
+    cell.flagged = !cell.flagged;
+
+    const element = getElement(row, column);
+
+    element.textContent = cell.flagged ? "🚩" : "";
+
+    if (window.flagSound) {
+        window.flagSound(cell.flagged);
+    }
+
+    if (window.flagAnimation) {
+        window.flagAnimation(element);
+    }
+
+    saveGame();
+}
+
+function getElement(row, column) {
+    return document.querySelector(
+        `.mine_cell[data-row="${row}"][data-column="${column}"]`
     );
 }
 
-window.numberAnimation = numberAnimation;
-window.flagAnimation = flagAnimation;
-window.mineExplosion = mineExplosion;
-window.resetAnimation = resetAnimation;
+function saveGame() {
+    try {
+        localStorage.setItem(
+            saveKey,
+            JSON.stringify({
+                rows,
+                columns,
+                mines,
+                board
+            })
+        );
+    } catch (error) {
+        console.warn("Could not save Minesweeper game.", error);
+    }
+}
+
+function loadGame() {
+    try {
+        const saved = localStorage.getItem(saveKey);
+
+        if (!saved) {
+            return false;
+        }
+
+        const data = JSON.parse(saved);
+
+        if (
+            data.rows !== rows ||
+            data.columns !== columns ||
+            !Array.isArray(data.board)
+        ) {
+            return false;
+        }
+
+        board = data.board;
+        mines = data.mines;
+
+        return true;
+    } catch (error) {
+        console.warn("Could not load Minesweeper game.", error);
+        return false;
+    }
+}
+
+function restoreVisualState() {
+    for (let row = 0; row < rows; row++) {
+        for (let column = 0; column < columns; column++) {
+            const cell = board[row][column];
+            const element = getElement(row, column);
+
+            if (!element) {
+                continue;
+            }
+
+            if (cell.flagged) {
+                element.textContent = "🚩";
+            }
+
+            if (cell.revealed) {
+                element.classList.add("revealed");
+
+                if (cell.mine) {
+                    element.textContent = "💣";
+                    element.classList.add("mine");
+                } else if (cell.number > 0) {
+                    element.textContent = cell.number;
+                }
+            }
+        }
+    }
+}
+
+function resetGame() {
+    getSize();
+    createBoard();
+    drawBoard();
+    saveGame();
+
+    if (window.resetAnimation) {
+        window.resetAnimation();
+    }
+}
+
+function resizeGame() {
+    const oldRows = rows;
+    const oldColumns = columns;
+
+    getSize();
+
+    if (oldRows !== rows || oldColumns !== columns) {
+        createBoard();
+        drawBoard();
+        saveGame();
+    }
+}
+
+function startGame() {
+    getSize();
+
+    if (!loadGame()) {
+        createBoard();
+        saveGame();
+    }
+
+    drawBoard();
+}
+
+document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+        saveGame();
+    }
+});
+
+window.addEventListener("pagehide", saveGame);
+
+window.addEventListener("beforeunload", saveGame);
+
+window.addEventListener("resize", resizeGame);
+
+startGame();
