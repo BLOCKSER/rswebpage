@@ -28,7 +28,7 @@ body {
 .home_hero {
     padding: 30px;
 
-    background-image: url("/rswebpage/images/batch2_mind.jpg");
+    background-image: url("../images/batch2_mind.jpg");
     background-size: 900px;
 }
 
