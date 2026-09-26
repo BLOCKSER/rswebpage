@@ -1,200 +1,194 @@
+/* =========================================================
+   MODERNIST / SWISS STYLE
+   Home page
+   ========================================================= */
+
+:root {
+    --black: #111111;
+    --white: #ffffff;
+    --paper: #f2f2ef;
+    --line: #c9c9c4;
+    --muted: #666666;
+    --accent: #ff3b30;
+    --max-width: 1180px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
 html {
     margin: 0;
     padding: 0;
+    background: var(--paper);
 }
 
 body {
     margin: 0;
-    padding: 20px;
-
-    background: #f4f4f4;
-    color: #222;
-
-    font-family: Arial, sans-serif;
-}
-
-.main {
-    max-width: 900px;
-    margin: auto;
-
-    background: white;
-    border: 1px solid #ddd;
-}
-
-.header {
-    border-bottom: 1px solid #ddd;
-}
-
-.home_hero {
-    padding: 30px;
-
-    background-image: url("../images/batch2_mind.jpg");
-    background-size: 900px;
-}
-
-.home_tagline {
-    font-size: 14px;
-}
-
-.navigation {
-    padding: 10px 20px;
-    background: #fafafa;
-}
-
-.navigation ul {
-    display: flex;
-    gap: 10px;
-
-    margin: 0;
-    padding: 0;
-
-    list-style: none;
-}
-
-.navigation a {
-    color: #222;
-    text-decoration: none;
-}
-
-.navigation li {
-    padding: 8px 14px;
-    border-radius: 6px;
-}
-
-.navigation li:hover {
-    background: #eee;
-}
-
-.body {
-    min-height: 400px;
-    padding: 30px;
-}
-
-.footer {
-    padding: 15px 30px;
-
-    background: #fafafa;
-    border-top: 1px solid #ddd;
-
-    color: #777;
-}
-#minesweeper_background {
-    position: fixed;
-    inset: 0;
-
-    overflow: hidden;
-
-    z-index: 0;
-    opacity: 0.75;
-
-    background: #b8c6d9;
-}
-
-.minesweeper_grid {
-    position: absolute;
-
-    left: 50%;
-    top: 50%;
-
-    transform: translate(-50%, -50%);
-
-    display: grid;
-}
-
-.mine_cell {
-    width: 32px;
-    height: 32px;
-
-    padding: 0;
-
-    background: #c8d0dc;
-    border: 2px outset #ffffff;
-
-    color: #222;
-    font-size: 14px;
-    font-weight: bold;
-
-    cursor: pointer;
-}
-
-.mine_cell:hover {
-    background: #e8edf5;
-}
-
-.mine_cell.revealed {
-    background: #eef2f7;
-    border: 1px solid #aab4c2;
-}
-
-/* Mine */
-
-.mine_cell.mine {
-    background: #ff6b6b;
-    color: #ffffff;
-
-    border: 1px solid #c92a2a;
-}
-
-/* Number colors */
-
-.mine_cell.revealed {
-    color: #2166d1;
-}
-
-.mine_cell.revealed:nth-child(3n) {
-    color: #239b56;
-}
-
-.mine_cell.revealed:nth-child(5n) {
-    color: #d63b3b;
-}
-
-.mine_cell.revealed:nth-child(7n) {
-    color: #8e44ad;
-}
-
-.physics_particle {
-    position: fixed;
-
-    left: 0;
-    top: 0;
-
-    margin: 0;
-    padding: 0;
-
-    pointer-events: none;
-
-    z-index: 99999;
-
-    will-change: transform;
-
-    display: block;
-}
-
-.pixel_particle {
-    background: #222;
-
-    border: 0;
-
-    image-rendering: pixelated;
-
-    box-shadow: 0 0 3px #000;
-}
-
-.number_particle {
-    color: #2166d1;
-
-    font-family: Arial, sans-serif;
-    font-weight: bold;
-
-    line-height: 1;
-
-    text-shadow:
-        1px 1px 0 #fff,
-        0 0 4px #2166d1;
+    padding: 28px;
+    background: var(--paper);
+    color: var(--black);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
 }
 
 .main {
     position: relative;
     z-index: 1;
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    background: var(--white);
+    border: 1px solid var(--black);
+}
+
+.header {
+    border-bottom: 1px solid var(--black);
+}
+
+.home_hero {
+    min-height: 330px;
+    padding: 34px;
+    display: flex;
+    align-items: flex-end;
+    background-color: #deded9;
+    background-image: linear-gradient(90deg, rgba(255,255,255,.84), rgba(255,255,255,.08)), url("../images/batch2_mind.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.home_tagline {
+    max-width: 720px;
+    padding: 14px 18px;
+    background: var(--white);
+    border-left: 8px solid var(--accent);
+    font-size: clamp(20px, 3vw, 38px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -1.5px;
+}
+
+.home_tagline small {
+    font-size: inherit;
+}
+
+.home_tagline b {
+    color: var(--accent);
+}
+
+.navigation {
+    padding: 0;
+    background: var(--white);
+}
+
+.navigation ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.navigation a {
+    display: block;
+    color: var(--black);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.navigation li {
+    padding: 13px 20px;
+    border-right: 1px solid var(--line);
+    transition: background .15s ease, color .15s ease;
+}
+
+.navigation a:first-child li {
+    border-left: 0;
+}
+
+.navigation a:hover li,
+.navigation a:focus-visible li {
+    background: var(--black);
+    color: var(--white);
+}
+
+.body {
+    min-height: 430px;
+    padding: 48px 34px;
+}
+
+.body p {
+    max-width: 720px;
+    margin: 0;
+    font-size: clamp(24px, 4vw, 52px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -2px;
+}
+
+.body p::before {
+    content: "01";
+    display: block;
+    margin-bottom: 18px;
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.footer {
+    padding: 16px 34px;
+    background: var(--black);
+    color: #d8d8d8;
+    font-size: 12px;
+}
+
+.footer p {
+    margin: 0;
+}
+
+.footer a {
+    color: var(--white);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.footer a:hover {
+    color: var(--accent);
+}
+
+@media (max-width: 700px) {
+    body {
+        padding: 10px;
+    }
+
+    .home_hero {
+        min-height: 260px;
+        padding: 20px;
+    }
+
+    .home_tagline {
+        border-left-width: 5px;
+        padding: 11px 13px;
+    }
+
+    .navigation li {
+        padding: 11px 14px;
+    }
+
+    .body {
+        min-height: 360px;
+        padding: 34px 20px;
+    }
+
+    .body p {
+        letter-spacing: -1px;
+    }
+
+    .footer {
+        padding: 14px 20px;
+        overflow-wrap: anywhere;
+    }
 }

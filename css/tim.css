@@ -1,0 +1,21 @@
+/* MODERNIST / SWISS STYLE — TIM */
+:root{--black:#111;--white:#fff;--paper:#f2f2ef;--line:#c9c9c4;--muted:#666;--accent:#ff3b30;--max-width:1180px}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--paper)}
+body{padding:28px;color:var(--black);font:15px/1.55 Arial,Helvetica,sans-serif}
+.main{width:100%;max-width:var(--max-width);margin:0 auto;background:var(--white);border:1px solid var(--black)}
+.navigation{padding:0;background:var(--white);border-bottom:1px solid var(--black)}
+.navigation ul{display:flex;flex-wrap:wrap;gap:0;margin:0;padding:0;list-style:none}
+.navigation a{display:block;color:var(--black);text-decoration:none;font-weight:700}
+.navigation li{padding:13px 20px;border-right:1px solid var(--line);transition:.15s ease}
+.navigation a:hover li,.navigation a:focus-visible li{background:var(--black);color:var(--white)}
+.body{min-height:430px;padding:48px 34px;background:var(--white)}
+.body:before{content:"TIM";display:block;margin-bottom:24px;color:var(--accent);font-size:11px;font-weight:700;letter-spacing:2px}
+.body h1,.body h2,.body h3{margin-top:0;line-height:1.05;letter-spacing:-1.5px}
+.body h1{font-size:clamp(38px,7vw,80px);margin-bottom:24px}
+.body p{max-width:760px}
+.body a{color:var(--black);text-decoration-thickness:2px;text-underline-offset:3px}
+.body a:hover{color:var(--accent)}
+.footer{padding:16px 34px;background:var(--black);color:#d8d8d8;font-size:12px}
+.footer p{margin:0}.footer a{color:var(--white);text-decoration:underline;text-underline-offset:3px}.footer a:hover{color:var(--accent)}
+@media(max-width:700px){body{padding:10px}.navigation li{padding:11px 14px}.body{padding:34px 20px}.footer{padding:14px 20px;overflow-wrap:anywhere}}
